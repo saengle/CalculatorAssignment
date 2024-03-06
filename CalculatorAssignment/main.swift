@@ -12,24 +12,40 @@
 
 import Foundation
 
-let input0 = readLine()!.split(separator: " ").map { Int(String($0))!}
+/*
+ 인풋 리드라인으로 읽고 정규표현식으로 맞게 작성되었는지 확인 후 넘기도록함.
+ 해야할것들
+ 1. 숫자 정규표현식으로 넘기기
+ 2. 연산부호 넘기면서 어떤 연산인지 연결
+ */
+
+let input0 = readLine()!.split(separator: " ").map { Double(String($0))!}
 let input1 = readLine()!.split(separator: " ").map { String($0)}
-let input2 = readLine()!.split(separator: " ").map { Int(String($0))!}
+let input2 = readLine()!.split(separator: " ").map { Double(String($0))!}
 
 class Input {
-    func checkFirstNum() {
+    func checkNum() {
         
     }
-    func checkSecondNum() {
-        
-    }
+    
     func checkOperationType() -> TypesOfOperation {
-        return MultiplyOperation()
-    }
+        var res = TypesOfOperation()
+        
+        switch input1 {
+        case ["+"]: res = AddOperation()
+        case ["-"]: res = SubtractOperation()
+        case ["*"]: res = MultiplyOperation()
+        case ["/"]: res = DivideOperation()
+        case ["%"]: res = ModuloOperation()
+        default: res = TypesOfOperation()
+        }
+        return res
+     }
 }
+
 class TypesOfOperation {
     func calculate(a: Double, b: Double) {
-        print("안들어가졌는데 ?")
+        
     }
 }
 
@@ -57,15 +73,19 @@ class DivideOperation: TypesOfOperation {
     }
 }
 
+class ModuloOperation: TypesOfOperation { //나머지 연산
+    override func calculate(a: Double, b: Double) {
+        print("\(a) 을 \(b)으로 나눈 나머지 값은 \(a.truncatingRemainder(dividingBy: b))입니다.")
+    }
+}
+
 class Calculator {
     
     final let firstNum: Double
     final let secondNum: Double
     var typesOfOperation: TypesOfOperation
     
-    init(firstNum: Double, secondNum: Double
-         ,typesOfOperation: TypesOfOperation
-    ) {
+    init(firstNum: Double, secondNum: Double, typesOfOperation: TypesOfOperation) {
         self.typesOfOperation = typesOfOperation
         self.firstNum = firstNum
         self.secondNum = secondNum
@@ -82,7 +102,9 @@ func inputTest() {
     print(input2)
 }
 let input = Input()
-let calculator = Calculator(firstNum: Double(input0[0]), secondNum: Double(input2[0]),
+
+let calculator = Calculator(firstNum: input0[0], secondNum: input2[0],
                             typesOfOperation: input.checkOperationType())
 inputTest()
 calculator.calculate()
+
