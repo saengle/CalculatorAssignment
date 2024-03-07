@@ -12,21 +12,11 @@
 
 import Foundation
 
-/*
- 인풋 리드라인으로 읽고 정규표현식으로 맞게 작성되었는지 확인 후 넘기도록함.
- 해야할것들
- 1. 숫자 정규표현식으로 넘기기
- 2. 연산부호 넘기면서 어떤 연산인지 연결
- */
-
 let input0 = readLine()!.split(separator: " ").map { Double(String($0))!}
 let input1 = readLine()!.split(separator: " ").map { String($0)}
 let input2 = readLine()!.split(separator: " ").map { Double(String($0))!}
 
 class Input {
-    func checkNum() {
-        
-    }
     
     func checkOperationType() -> TypesOfOperation {
         var res = TypesOfOperation()
@@ -96,15 +86,11 @@ class Calculator {
     }
 }
 
-func inputTest() {
-    print(type(of:input0))
-    print(input1)
-    print(input2)
-}
+
 let input = Input()
 
 let calculator = Calculator(firstNum: input0[0], secondNum: input2[0],
                             typesOfOperation: input.checkOperationType())
-inputTest()
+
 calculator.calculate()
 
