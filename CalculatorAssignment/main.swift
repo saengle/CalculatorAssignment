@@ -36,11 +36,7 @@ class Input {
         case ["-"]: res = SubtractOperation()
         case ["*"]: res = MultiplyOperation()
         case ["/"]: res = DivideOperation()
-<<<<<<< HEAD
         case ["%"]: res = ModuloOperation()
-=======
-        case ["%"]: res = TypesOfOperation() // 나머지 연산 추가하기
->>>>>>> 33cbdcd (Fix: checkOperationTypeif elseif 문에 경우가 여러가지라 Switch로 바꿈)
         default: res = TypesOfOperation()
         }
         return res
